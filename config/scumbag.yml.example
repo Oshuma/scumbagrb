@@ -1,0 +1,17 @@
+---
+server: 'irc.example.net'
+port: 6667
+channels:
+  - '#some_channel'
+  - '#another_channel'
+
+# Optional:
+# ssl:
+#   use: true
+#   verify: false
+
+nick: 'scumbag'
+realname: 'Scumbag Steve'
+
+# Command prefix:
+prefix: '?'
