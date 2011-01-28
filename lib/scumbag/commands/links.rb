@@ -22,13 +22,15 @@ module Scumbag
         # TODO: Reflect the command prefix/name instead of hard coding.
         query = m.message.gsub(/^\?url/, '').strip
 
+        # TODO: This shit should probably be in the model.
+
         # Search by Regexp.
         if query.start_with?('/') && query.end_with?('/')
           # Strip the beginning and trailing '/'
           query.gsub!(/^\//, '').gsub!(/\/$/, '')
-          @links = Models::Link.where(:url => Regexp.new(query)).limit(LIMIT)
+          @links = Models::Link.where(:url => Regexp.new(query)).desc(:timestamp).limit(LIMIT)
         else # It's a nick search.
-          @links = Models::Link.where(:nick => query).limit(LIMIT)
+          @links = Models::Link.where(:nick => query).desc(:timestamp).limit(LIMIT)
         end
 
         bot.msg(m.channel, @links.map(&:url).join(' | '))
