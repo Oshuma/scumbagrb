@@ -1,10 +1,30 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    activemodel (3.0.3)
+      activesupport (= 3.0.3)
+      builder (~> 2.1.2)
+      i18n (~> 0.4)
+    activesupport (3.0.3)
+    bson (1.2.0)
+    bson_ext (1.2.0)
+    builder (2.1.2)
     cinch (1.1.1)
+    i18n (0.5.0)
+    mongo (1.2.0)
+      bson (>= 1.2.0)
+    mongoid (2.0.0.rc.6)
+      activemodel (~> 3.0)
+      mongo (~> 1.2)
+      tzinfo (~> 0.3.22)
+      will_paginate (~> 3.0.pre)
+    tzinfo (0.3.24)
+    will_paginate (3.0.pre2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  bson_ext (~> 1.2)
   cinch
+  mongoid (~> 2.0.0.rc.6)

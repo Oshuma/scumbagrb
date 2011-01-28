@@ -5,7 +5,7 @@ channels:
   - '#some_channel'
   - '#another_channel'
 
-# Optional:
+# Optional SSL:
 # ssl:
 #   use: true
 #   verify: false
@@ -15,3 +15,9 @@ realname: 'Scumbag Steve'
 
 # Command prefix:
 prefix: '?'
+
+# Mongo database config:
+database:
+  host: 'localhost'
+  port: 27017
+  database: 'scumbag'
