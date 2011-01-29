@@ -10,6 +10,7 @@ GEM
     bson_ext (1.2.0)
     builder (2.1.2)
     cinch (1.1.1)
+    diff-lcs (1.1.2)
     i18n (0.5.0)
     mongo (1.2.0)
       bson (>= 1.2.0)
@@ -18,6 +19,14 @@ GEM
       mongo (~> 1.2)
       tzinfo (~> 0.3.22)
       will_paginate (~> 3.0.pre)
+    rspec (2.4.0)
+      rspec-core (~> 2.4.0)
+      rspec-expectations (~> 2.4.0)
+      rspec-mocks (~> 2.4.0)
+    rspec-core (2.4.0)
+    rspec-expectations (2.4.0)
+      diff-lcs (~> 1.1.2)
+    rspec-mocks (2.4.0)
     tzinfo (0.3.24)
     will_paginate (3.0.pre2)
 
@@ -28,3 +37,4 @@ DEPENDENCIES
   bson_ext (~> 1.2)
   cinch
   mongoid (~> 2.0.0.rc.6)
+  rspec (>= 2.4.0)

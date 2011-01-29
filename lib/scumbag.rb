@@ -7,19 +7,25 @@ require 'yaml'
 require 'scumbag/commands'
 require 'scumbag/models'
 
+# TODO: Live bot admin.
+# TODO: Dynamic code reloading.
 module Scumbag
-  VERSION = '0.0.1'
+  VERSION = '0.1.0'
 
   def self.options
     @@options = {} unless defined?(@@options)
     @@options
   end
 
+  # Configures Scumbag with the given +config_file+.
+  def self.setup!(config_file)
+    @@options = ::YAML.load_file(config_file)
+    configure_database
+  end
+
   # Create and return a Cinch::Bot instance from the given +config_file+.
   def self.create_bot(config_file)
-    @@options = ::YAML.load_file(config_file)
-
-    configure_database
+    setup!(config_file)
 
     bot = ::Cinch::Bot.new do
       configure do |c|
@@ -50,6 +56,10 @@ module Scumbag
     return unless @@options['database']
     ::Mongoid.configure do |config|
       config.from_hash(@@options['database'])
+      if @@options['database']['log']
+        config.logger = Logger.new(@@options['database']['log'])
+      end
     end
   end
+
 end

@@ -1,17 +1,28 @@
 require "#{File.dirname(__FILE__)}/lib/scumbag"
 
-task :default => :run
+require 'rspec/core/rake_task'
+
+task :default => :spec
+
+desc 'Run the specs'
+RSpec::Core::RakeTask.new(:spec)
 
 desc 'Run the bot (in the foreground)'
 task :run => [ 'scumbag:run' ]
 
 namespace :scumbag do
   task :setup do
-    config_file = "#{File.dirname(__FILE__)}/config/scumbag.yml"
-    @scumbag = Scumbag.create_bot(config_file)
+    @config_file = "#{File.dirname(__FILE__)}/config/scumbag.yml"
   end
 
-  task :run => [ 'scumbag:setup' ] do
+  task :run => ['scumbag:setup'] do
+    @scumbag = Scumbag.create_bot(@config_file)
     @scumbag.start
+  end
+
+  desc 'Open an IRB session with the library loaded'
+  task :console => ['scumbag:setup'] do
+    STDOUT.puts "\nRun 'Scumbag.setup!(\"#{@config_file}\")' before interacting with the database!\n\n"
+    sh "irb -I ./lib -r 'scumbag'"
   end
 end

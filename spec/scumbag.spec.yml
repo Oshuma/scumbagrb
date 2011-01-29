@@ -1,0 +1,21 @@
+---
+server: 'irc.example.net'
+port: 6667
+channels:
+  - '#scumbag'
+
+# ssl:
+#   use: true
+#   verify: false
+
+nick: 'scumbag'
+realname: 'Scumbag Steve'
+
+prefix: '?'
+
+database:
+  host: 'localhost'
+  port: 27017
+  database: 'scumbag_test'
+  allow_dynamic_fields: false
+  log: 'tmp/scumbag_spec.log'
