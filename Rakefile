@@ -7,6 +7,9 @@ task :default => :spec
 desc 'Run the specs'
 RSpec::Core::RakeTask.new(:spec)
 
+desc 'Open an IRB session with the library loaded'
+task :console => ['scumbag:console']
+
 desc 'Run the bot (in the foreground)'
 task :run => [ 'scumbag:run' ]
 
@@ -20,7 +23,6 @@ namespace :scumbag do
     @scumbag.start
   end
 
-  desc 'Open an IRB session with the library loaded'
   task :console => ['scumbag:setup'] do
     STDOUT.puts "\nRun 'Scumbag.setup!(\"#{@config_file}\")' before interacting with the database!\n\n"
     sh "irb -I ./lib -r 'scumbag'"
