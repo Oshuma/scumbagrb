@@ -33,7 +33,7 @@ module Scumbag
           @links = Models::Link.where(:nick => query).desc(:timestamp).limit(LIMIT)
         end
 
-        bot.msg(m.channel, @links.map(&:url).join(' | '))
+        m.reply(@links.map(&:url).join(' | '))
       end
 
       # Handles channel messages.
