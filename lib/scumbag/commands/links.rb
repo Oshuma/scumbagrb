@@ -5,9 +5,6 @@ module Scumbag
 
       URL_REGEXP = /((ftp|git|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(?:\/|\/([\w#!:.?+=&%@!\-\/]))?)/
 
-      # TODO: Make this an optional arg for the command.
-      LIMIT = 5
-
       # Command pattern: <prefix>url
       match /url/
 
@@ -21,18 +18,7 @@ module Scumbag
       def execute(m)
         # TODO: Reflect the command prefix/name instead of hard coding.
         query = m.message.gsub(/^\?url/, '').strip
-
-        # TODO: This shit should probably be in the model.
-
-        # Search by Regexp.
-        if query.start_with?('/') && query.end_with?('/')
-          # Strip the beginning and trailing '/'
-          query.gsub!(/^\//, '').gsub!(/\/$/, '')
-          @links = Models::Link.where(:url => Regexp.new(query)).desc(:timestamp).limit(LIMIT)
-        else # It's a nick search.
-          @links = Models::Link.where(:nick => query).desc(:timestamp).limit(LIMIT)
-        end
-
+        @links = Models::Link.search(query)
         m.reply(@links.map(&:url).join(' | '))
       end
 
