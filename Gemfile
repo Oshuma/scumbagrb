@@ -2,9 +2,9 @@ source 'http://rubygems.org'
 
 gem 'cinch'
 
-gem 'mongoid', '~> 2.0.0.rc.6'
-gem 'bson_ext', '~> 1.2'
+gem 'mongoid', '>= 2.0.2'
+gem 'bson_ext', '>= 1.3.1'
 
 group :test do
-  gem 'rspec', '>= 2.4.0'
+  gem 'rspec', '>= 2.6.0'
 end

@@ -3,7 +3,7 @@ require 'rspec'
 
 SPEC_CONFIG_FILE = "#{File.dirname(__FILE__)}/scumbag.spec.yml"
 
-Rspec.configure do |config|
+RSpec.configure do |config|
   config.mock_with :rspec
 
   Scumbag.setup!(SPEC_CONFIG_FILE)
