@@ -30,8 +30,11 @@ module Scumbag
     bot = ::Cinch::Bot.new do
       configure do |c|
         # This is where each Command class should be added.
-        # TODO: Allow dynamic loading of plugins.
-        c.plugins.plugins = [ Commands::Links ]
+        # TODO: Allow dynamic loading of plugins; also, move this array to a config or some shit.
+        c.plugins.plugins = [
+          Scumbag::Commands::Links,
+          Scumbag::Commands::SpellCheck
+        ]
         c.plugins.prefix = @@options['prefix'] if @@options['prefix']
 
         c.server   = @@options['server']
