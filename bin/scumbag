@@ -5,6 +5,9 @@ require "#{File.dirname(__FILE__)}/../lib/scumbag"
 # TODO: Add a daemon option.
 if $0 == __FILE__
   config = ARGV[0] || "#{File.dirname(__FILE__)}/../config/scumbag.yml"
+
+  raise "Config file not found: '#{config}'" unless File.exists?(config)
+
   scumbag = Scumbag.create_bot(config)
   scumbag.start
 end

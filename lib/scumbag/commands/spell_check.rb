@@ -33,6 +33,7 @@ module Scumbag
       private
 
       def spell_check(word)
+        # FIXME: Should probably shell escape this.
         aspell = %x[ echo "#{word}" | #{ASPELL} pipe ]
         line   = aspell.split("\n")[1]
 
