@@ -1,6 +1,6 @@
 module Scumbag
   module Commands
-    class SpellCheck
+    class SpellCheck < Scumbag::Commands::BaseCommand
       include Cinch::Plugin
 
       ASPELL = '/usr/bin/aspell'
@@ -9,15 +9,19 @@ module Scumbag
       # Used to check a channel message for 'word (sp?)'.
       SPELL_CHECK_MESSAGE = /(\w+)\s{1}\(sp\?\)/
 
+      # Command pattern: <prefix>sp
       match /sp/
-      plugin 'spell'
-      help 'Usage: ?sp <word>'
+
+      # Command name and options.
+      set :plugin_name, 'sp'
+      set :prefix, '?'
+      set :help, "Usage: #{self.prefix}#{self.plugin_name} <word>"
 
       listen_to :channel, :method => :channel_message
 
       # Spell checks the given word.
       def execute(m)
-        word = m.message.gsub(/^\?sp/, '').strip
+        word = extract_args(m)
         m.reply(spell_check(word))
       end
 

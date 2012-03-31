@@ -1,6 +1,6 @@
 module Scumbag
   module Commands
-    class Links
+    class Links < Scumbag::Commands::BaseCommand
       include Cinch::Plugin
 
       URL_REGEXP = /((ftp|git|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(?:\/|\/([\w#!:.?+=&%@!\-\/]))?)/
@@ -8,16 +8,16 @@ module Scumbag
       # Command pattern: <prefix>url
       match /url/
 
-      # Command name and help text.
-      plugin 'url'
-      help 'Usage: ?url nick OR /pattern/'
+      # Command name and options.
+      set :plugin_name, 'url'
+      set :prefix, '?'
+      set :help, "Usage: #{self.prefix}#{self.plugin_name} <nick> OR /pattern/"
 
       listen_to :channel, :method => :channel_message
 
       # Called when the command is <tt>match</tt>ed.
       def execute(m)
-        # TODO: Reflect the command prefix/name instead of hard coding.
-        query = m.message.gsub(/^\?url/, '').strip
+        query  = extract_args(m)
         @links = Models::Link.search(query)
         m.reply(@links.map(&:url).join(' | '))
       end
