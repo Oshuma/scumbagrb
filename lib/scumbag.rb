@@ -10,7 +10,7 @@ require 'scumbag/models'
 # TODO: Live bot admin.
 # TODO: Dynamic code reloading.
 module Scumbag
-  VERSION = '0.1.0'
+  VERSION = '0.2.0'
 
   def self.options
     @@options = {} unless defined?(@@options)
@@ -40,6 +40,7 @@ module Scumbag
         c.server   = @@options['server']
         c.port     = @@options['port']
         c.nick     = @@options['nick']
+        c.user     = @@options['user']
         c.channels = @@options['channels']
 
         # SSL shit.
