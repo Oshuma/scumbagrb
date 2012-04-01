@@ -10,8 +10,9 @@ channels:
 #   use: true
 #   verify: false
 
+# IRC details:
 nick: 'scumbag'
-realname: 'Scumbag Steve'
+user: 'scumbag'
 
 # Command prefix:
 prefix: '?'
