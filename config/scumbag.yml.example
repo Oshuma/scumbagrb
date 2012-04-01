@@ -12,7 +12,9 @@ channels:
 
 # IRC details:
 nick: 'scumbag'
-user: 'scumbag'
+# Optional:
+# user: 'steve'
+# realname: 'A Total Scumbag'
 
 # Command prefix:
 prefix: '?'

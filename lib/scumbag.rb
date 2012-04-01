@@ -40,7 +40,8 @@ module Scumbag
         c.server   = @@options['server']
         c.port     = @@options['port']
         c.nick     = @@options['nick']
-        c.user     = @@options['user'] if @@options['user']
+        c.user     = @@options['user']     if @@options['user']
+        c.realname = @@options['realname'] if @@options['realname']
         c.channels = @@options['channels']
 
         # SSL shit.
