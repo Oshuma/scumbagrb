@@ -1,6 +1,8 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'cinch'
+require 'geokit'
+require 'ipaddr'
 require 'mongoid'
 require 'yaml'
 
@@ -32,6 +34,7 @@ module Scumbag
         # This is where each Command class should be added.
         # TODO: Allow dynamic loading of plugins; also, move this array to a config or some shit.
         c.plugins.plugins = [
+          Scumbag::Commands::GeoIP,
           Scumbag::Commands::Links,
           Scumbag::Commands::SpellCheck
         ]
