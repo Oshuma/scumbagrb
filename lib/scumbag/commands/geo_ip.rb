@@ -30,7 +30,11 @@ module Scumbag
 
         loc = ::Geokit::Geocoders::MultiGeocoder.geocode(ip)
 
-        "#{ip}: #{loc.city}, #{loc.state}, #{loc.country_code} | #{loc.lat}, #{loc.lng}"
+        if loc.success?
+          "#{ip}: #{loc.city}, #{loc.state}, #{loc.country_code} | #{loc.ll}"
+        else
+          "No info for '#{ip}'"
+        end
       end
     end
   end
