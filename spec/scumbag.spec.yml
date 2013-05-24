@@ -16,4 +16,6 @@ prefix: '?'
 database:
   adapter: 'sqlite3'
   database: 'db/scumbag_test.sqlite3'
+  pool: 5
+  timeout: 5000
   log: 'tmp/scumbag_test.log'
