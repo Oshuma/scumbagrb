@@ -5,7 +5,7 @@ Requirements
 ------------
 * Ruby 1.9+
 * [bundler](http://gembundler.com/)
-* [MongoDB](http://www.mongodb.org/)
+* [SQLite3](http://www.sqlite.org/)
 
 Install
 -------
