@@ -1,4 +1,5 @@
 .rbenv-*
 .rvmrc
 config/scumbag.yml
+db/*.sqlite3
 tmp/*

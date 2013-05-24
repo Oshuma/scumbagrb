@@ -1,6 +1,7 @@
-require "#{File.dirname(__FILE__)}/lib/scumbag"
-
+require 'bundler'
 require 'rspec/core/rake_task'
+
+require 'scumbag'
 
 task :default => :spec
 
@@ -26,5 +27,13 @@ namespace :scumbag do
   task :console => ['scumbag:setup'] do
     STDOUT.puts "\nRun 'Scumbag.setup!(\"#{@config_file}\")' before interacting with the database!\n\n"
     sh "irb -I ./lib -r 'scumbag'"
+  end
+end
+
+namespace :db do
+  desc 'Run the database migrations'
+  task :migrate => ['scumbag:setup'] do
+    Scumbag.setup!(@config_file)
+    Scumbag.run_migrations!
   end
 end

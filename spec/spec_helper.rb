@@ -4,14 +4,16 @@ require 'rspec'
 SPEC_CONFIG_FILE = "#{File.dirname(__FILE__)}/scumbag.spec.yml"
 
 RSpec.configure do |config|
+  include Scumbag::Models
+
   config.mock_with :rspec
 
-  Scumbag.setup!(SPEC_CONFIG_FILE)
+  config.before :suite do
+    Scumbag.setup!(SPEC_CONFIG_FILE)
 
-  # Drop all collections after specs are run.
-  config.after :suite do
-    Mongoid.master.collections.select do |collection|
-      collection.name !~ /system/
-    end.each(&:drop)
+    # Re-create the database and run migrations.
+    database = ActiveRecord::Base.connection_config[:database]
+    File.delete(database) if File.exists?(database)
+    Scumbag.run_migrations!
   end
 end

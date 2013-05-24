@@ -14,8 +14,6 @@ realname: 'Scumbag Steve'
 prefix: '?'
 
 database:
-  host: 'localhost'
-  port: 27017
-  database: 'scumbag_test'
-  allow_dynamic_fields: false
-  log: 'tmp/scumbag_spec.log'
+  adapter: 'sqlite3'
+  database: 'db/scumbag_test.sqlite3'
+  log: 'tmp/scumbag_test.log'

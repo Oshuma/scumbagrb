@@ -1,9 +1,7 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-
+require 'active_record'
 require 'cinch'
 require 'geokit'
 require 'ipaddr'
-require 'mongoid'
 require 'yaml'
 
 require 'scumbag/commands'
@@ -12,7 +10,7 @@ require 'scumbag/models'
 # TODO: Live bot admin.
 # TODO: Dynamic code reloading.
 module Scumbag
-  VERSION = '0.2.0'
+  VERSION = '0.3.0'
 
   def self.options
     @@options = {} unless defined?(@@options)
@@ -60,15 +58,18 @@ module Scumbag
     bot
   end
 
+  def self.run_migrations!
+    ActiveRecord::Migrator.migrate("db/migrate/")
+  end
+
   private
 
   def self.configure_database
     return unless @@options['database']
-    ::Mongoid.configure do |config|
-      config.from_hash(@@options['database'])
-      if @@options['database']['log']
-        config.logger = Logger.new(@@options['database']['log'])
-      end
+
+    ActiveRecord::Base.establish_connection(@@options['database'])
+    if @@options['database']['log']
+      ActiveRecord::Base.logger = Logger.new(@@options['database']['log'])
     end
   end
 

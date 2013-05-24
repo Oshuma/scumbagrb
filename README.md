@@ -19,6 +19,10 @@ Make sure you have the gem dependencies:
 
     $ bundle install
 
+Run the migrations:
+
+    $ rake db:migrate
+
 Now run the server (in the foreground):
 
     $ rake run

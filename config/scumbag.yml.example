@@ -19,8 +19,9 @@ nick: 'scumbag'
 # Command prefix:
 prefix: '?'
 
-# Mongo database config:
+# SQLite database config:
 database:
-  host: 'localhost'
-  port: 27017
-  database: 'scumbag'
+  adapter: 'sqlite3'
+  database: 'db/scumbag.sqlite3'
+  pool: 5
+  timeout: 5000
