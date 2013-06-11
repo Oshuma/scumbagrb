@@ -1,3 +1,5 @@
+.rbenv-gemsets
+.rbenv-version
 .rvmrc
 config/scumbag.yml
 tmp/*
